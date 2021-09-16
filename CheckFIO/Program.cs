@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using StrignComporation;
 
 namespace CheckFIO
@@ -44,7 +46,7 @@ namespace CheckFIO
 
         static void AddLog(string log)
         {
-            using (var sw = new StreamWriter("D:\\checkUsers1.csv", true))
+            using (var sw = new StreamWriter("D:\\checkUsers3.csv", true))
             {
                 sw.WriteLine(log);
             }
@@ -59,6 +61,9 @@ namespace CheckFIO
             double cur, min = double.MaxValue;
 
             var sqlL = sql.OrderBy(x => x);
+
+            var sw = new Stopwatch();
+            sw.Start();
             foreach(var it in sqlL)
             {
                 min = double.MaxValue;
@@ -77,8 +82,50 @@ namespace CheckFIO
                 if (min > 0)
                     AddLog($"{it},{prog[minIndex]},{min}");
             }
+            sw.Stop();
+            Console.WriteLine("Time {0}", sw.ElapsedMilliseconds);
+        }
 
-            Console.WriteLine("Hello World!");
+        static void MainAsync(string[] args)
+        {
+            var sql = LoadUsersSQL();
+            var prog = LoadUsersProgress();
+
+            int minIndex = 0;
+            double cur, min = double.MaxValue;
+
+            var sqlL = sql.OrderBy(x => x);
+            var tasks = new Task[prog.Count];
+
+            var sw = new Stopwatch();
+            sw.Start();
+            foreach (var it in sqlL)
+            {
+                min = double.MaxValue;
+                for (int i = 0; i < prog.Count; i++)
+                {
+                    object index = i;
+                    var it1 = prog[i];
+
+                    tasks[i] = new Task(() =>
+                    {
+                        cur = it.D(it1);
+                        if (cur < min)
+                        {
+                            minIndex = (int)index;
+                            min = cur;
+                        }
+                    });
+                    tasks[i].Start();
+                }
+                Task.WaitAll(tasks);
+
+                if (min > 0)
+                    AddLog($"{it},{prog[minIndex]},{min}");
+            }
+            sw.Stop();
+
+            Console.WriteLine("Time {0}", sw.ElapsedMilliseconds);
         }
     }
 }

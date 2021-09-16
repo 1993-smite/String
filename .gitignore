@@ -5,3 +5,5 @@
 /CheckFIO/obj
 /StrignComporation/obj
 /.vs/StrignComporation
+/StrignComporation/bin/Debug/netcoreapp3.1
+/CheckFIO/bin/Debug/netcoreapp3.1
