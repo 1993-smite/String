@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Elastic
 {
-
     public class ESActionsTest
     {
         private Lazy<ESActions<Test>> _lazyActions = new Lazy<ESActions<Test>>(() => new ESActions<Test>());
@@ -50,24 +49,32 @@ namespace Elastic
             var summary = BenchmarkRunner.Run<ESActionsTest>();
         }
 
-        static void Main(string[] args)
+        static void ESActionCreate()
         {
-            var tsk = new Task(BenchmarkRunTestActionTime);
-            tsk.Start();
-
             var test = new Test();
-            var response = ES.ESClient.Get<Test>(1, idx => idx.Index(test.GetIndex)); // returns an IGetResponse mapped 1-to-1 with the Elasticsearch JSON response
+            var response = ES
+                .ESClient
+                .Get<Test>(1, idx => idx.Index(test.GetIndex)); // returns an IGetResponse mapped 1-to-1 with the Elasticsearch JSON response
             test = response.Source; // the original document
 
             var actions = new ESActions<Test>();
             actions.Create(new Test()
             {
-                Id = 8,
+                Id = 9,
                 Title = "c# .net auto create",
                 Description = "auto create elastic search"
             });
-
             Console.WriteLine($"Result: \n{test}");
+        }
+
+        static void Main(string[] args)
+        {
+            var tsk = new Task(ESActionCreate);
+            tsk.Start();
+
+            BenchmarkRunTestActionTime();
+
+            Console.ReadLine();
         }
     }
 }
