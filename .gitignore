@@ -11,3 +11,6 @@
 /StrignComporationTest/obj
 /Elastic/bin/Debug/netcoreapp3.1
 /Elastic/obj
+/ElasticTest/obj
+/ElasticTest/bin/Debug/netcoreapp3.1
+/Elastic/bin/Release/netcoreapp3.1
