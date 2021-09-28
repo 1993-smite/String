@@ -14,3 +14,9 @@
 /ElasticTest/obj
 /ElasticTest/bin/Debug/netcoreapp3.1
 /Elastic/bin/Release/netcoreapp3.1
+/Elastic/obj
+/Elastic/bin
+/ElasticTest/bin/Debug/netcoreapp3.1
+/ElasticTest/obj/Debug/netcoreapp3.1
+/ElasticTest/obj/Release/netcoreapp3.1
+/ElasticTest/obj
