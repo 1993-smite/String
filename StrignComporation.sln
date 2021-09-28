@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CheckFIO", "CheckFIO\CheckF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StrignComporationTest", "StrignComporationTest\StrignComporationTest.csproj", "{0D0F3D46-427D-438A-9BDD-C1225B2F899F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elastic", "Elastic\Elastic.csproj", "{9FAE74AB-CE7F-4E53-BD15-DA07E8A088FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elastic", "Elastic\Elastic.csproj", "{9FAE74AB-CE7F-4E53-BD15-DA07E8A088FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticTest", "ElasticTest\ElasticTest.csproj", "{3C5FD7D9-2ABD-45EA-BA88-033DBC7BFC6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{9FAE74AB-CE7F-4E53-BD15-DA07E8A088FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FAE74AB-CE7F-4E53-BD15-DA07E8A088FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FAE74AB-CE7F-4E53-BD15-DA07E8A088FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C5FD7D9-2ABD-45EA-BA88-033DBC7BFC6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C5FD7D9-2ABD-45EA-BA88-033DBC7BFC6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C5FD7D9-2ABD-45EA-BA88-033DBC7BFC6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C5FD7D9-2ABD-45EA-BA88-033DBC7BFC6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Elastic
+﻿namespace Elastic
 {
-    interface IElasticSearchActions<T>
+    interface IElasticActions<T>
     {
         bool Create(T instance);
         bool Update(T instance);
