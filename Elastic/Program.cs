@@ -2,6 +2,7 @@
 using BenchmarkDotNet.Running;
 using Elastic.Core;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Elastic
@@ -44,32 +45,48 @@ namespace Elastic
 
     class Program
     {
+        static ESActions<Test> Actions => new ESActions<Test>();
+
         static void BenchmarkRunTestActionTime()
         {
-            var summary = BenchmarkRunner.Run<ESActionsTest>();
+            BenchmarkRunner.Run<ESActionsTest>();
         }
 
-        static void ESActionCreate()
+        static Test ESActionCreate()
         {
-            var test = new Test();
-            var response = ES
-                .ESClient
-                .Get<Test>(1, idx => idx.Index(test.GetIndex)); // returns an IGetResponse mapped 1-to-1 with the Elasticsearch JSON response
-            test = response.Source; // the original document
-
-            var actions = new ESActions<Test>();
-            actions.Create(new Test()
+            var test = new Test()
             {
                 Id = 9,
                 Title = "c# .net auto create",
                 Description = "auto create elastic search"
-            });
-            Console.WriteLine($"Result: \n{test}");
+            };
+            Actions.Create(test);
+            Console.WriteLine($"Result: created \n{test}");
+
+            return test;
+        }
+
+        static Test ESActionUpdate(Test test)
+        {
+            test.Title = "c# .net auto update";
+
+            Actions.Update(test);
+            Console.WriteLine($"Result: updated \n{test}");
+
+            return test;
+        }
+
+        static void ESActionDelete(Test test)
+        {
+            Actions.Delete(test);
+            Console.WriteLine($"Result: removed \n{test}");
         }
 
         static void Main(string[] args)
         {
-            var tsk = new Task(ESActionCreate);
+            var tsk = new Task<Test>(() => ESActionCreate());
+            tsk.ContinueWith((tsk) => ESActionUpdate(tsk.Result))
+               .ContinueWith((tsk) => ESActionDelete(tsk.Result));
             tsk.Start();
 
             BenchmarkRunTestActionTime();
