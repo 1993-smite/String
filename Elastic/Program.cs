@@ -1,5 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
+using Elastic.Core;
 using System;
 using System.Threading.Tasks;
 
