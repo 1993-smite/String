@@ -1,10 +1,6 @@
-using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Running;
 using Elastic;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.IO;
 
 namespace ElasticTest
 {
