@@ -1,5 +1,6 @@
 ﻿using Phonix;
 using System;
+using System.Collections.Generic;
 
 namespace StrignComporation
 {
@@ -12,7 +13,14 @@ namespace StrignComporation
             return TemplateD(_generator.IsSimilar, s, s1);
         }
 
-        private static double TemplateD(Func<string[], bool> func, string s, string s1)
+        /// <summary>
+        /// only one word
+        /// </summary>
+        /// <param name="func"></param>
+        /// <param name="s"></param>
+        /// <param name="s1"></param>
+        /// <returns></returns>
+        private static double TemplateD(Func<string[], bool> func, string s, string s1, bool onlyOneWord = true)
         {
             var sArr = s.Split(" ");
             var sArr1 = s1.Split(" ");
@@ -31,15 +39,22 @@ namespace StrignComporation
                 ? sArr1
                 : sArr;
 
+            var lasted = new List<int>();
+
             foreach (var it in minArr)
             {
                 min = 1;
                 for (int i = 0; i < maxArr.Length; i++)
                 {
+                    if (lasted.Contains(i))
+                        continue;
+
                     cur = func(new string[2] { it, maxArr[i] });
 
                     if (cur)
                     {
+                        if (onlyOneWord)
+                            lasted.Add(i);
                         min = 0;
                         break;
                     }
