@@ -103,5 +103,8 @@ namespace StrignComporation
             return EnglishTranslate.TranslateEnglish(text);
         }
     
+
+
+
     }
 }

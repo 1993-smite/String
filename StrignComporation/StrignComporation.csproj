@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="NLog" Version="4.7.13" />
+    <PackageReference Include="Phonix" Version="1.0.2" />
     <PackageReference Include="String.Similarity" Version="3.0.0" />
   </ItemGroup>
 
