@@ -17,3 +17,5 @@
 /CheckFIO/bin/Release/netcoreapp3.1
 /StrignComporationTest/bin/Release/netcoreapp3.1
 /StrignComporation/bin/Release/netcoreapp3.1
+/FIO.Compare/obj
+/FIO.Compare/bin/Debug/netcoreapp3.1
