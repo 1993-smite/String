@@ -1,4 +1,5 @@
 using Elastic;
+using Elastic.Core;
 using NUnit.Framework;
 using System;
 
