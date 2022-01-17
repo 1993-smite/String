@@ -17,7 +17,7 @@ namespace FIO.Compare
 
         static void Load()
         {
-            using (var sr = new StreamReader(@"D:\progress.csv"))
+            using (var sr = new StreamReader(@"D:\progress1.csv"))
             {
                 while (!sr.EndOfStream)
                 {
@@ -32,16 +32,31 @@ namespace FIO.Compare
 
         static void Main(string[] args)
         {
-            Parallel.For(0, Users.Count - 1, Compare);
+            //Load();
+            //Parallel.For(0, Users.Count - 1, Compare);
+
+            var fio = "Иванов Иван";
+            var fios = new List<string>()
+            {
+                "Иванов Иван Иванович",
+                "Ивановский Антон Иванович",
+                "Иванович Иван Антонович",
+                "Иванов Артем Иванович"
+            };
+
+
+            foreach (var f in fios)
+            {
+                var d = fio.Eng().Metaphone(f.Eng());
+
+                Console.WriteLine("\t {0}",d);
+            }
 
             Console.WriteLine("Hello World!");
         }
 
         static void Compare(int from)
         {
-            //Logger.Info($"Index {from}" +
-            //    $", {Thread.CurrentThread.ManagedThreadId}");
-
             var user = Users[from];
             for (int to = from + 1; to < Users.Count; to++)
             {
