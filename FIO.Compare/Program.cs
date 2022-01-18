@@ -17,14 +17,14 @@ namespace FIO.Compare
 
         static void Load()
         {
-            using (var sr = new StreamReader(@"D:\progress1.csv"))
+            using (var sr = new StreamReader(@"D:\progress4.csv"))
             {
                 while (!sr.EndOfStream)
                 {
                     var line = sr.ReadLine();
                     if (line.Length > 2)
                     {
-                        Users.Add(new User(line));
+                        Users.Add(new User(line.Replace("?", "")));
                     }
                 }
             }
@@ -32,27 +32,9 @@ namespace FIO.Compare
 
         static void Main(string[] args)
         {
-            //Load();
-            //Parallel.For(0, Users.Count - 1, Compare);
-
-            var fio = "Иванов Иван";
-            var fios = new List<string>()
-            {
-                "Иванов Иван Иванович",
-                "Ивановский Антон Иванович",
-                "Иванович Иван Антонович",
-                "Иванов Артем Иванович"
-            };
-
-
-            foreach (var f in fios)
-            {
-                var d = fio.Eng().Metaphone(f.Eng());
-
-                Console.WriteLine("\t {0}",d);
-            }
-
-            Console.WriteLine("Hello World!");
+            Load();
+            Parallel.For(0, Users.Count - 1, Compare);
+            Console.WriteLine("The End!");
         }
 
         static void Compare(int from)
@@ -65,7 +47,7 @@ namespace FIO.Compare
                 var d = user.FIO.Eng().Metaphone(toUser.FIO.Eng());
                 if (d < 1)
                 {
-                    Logger.Info($"{user.FIO.Eng()};{toUser.FIO.Eng()};{d}");
+                    Logger.Info($"{from};{user.FIO.Eng()};{to};{toUser.FIO.Eng()};{d}");
                 }
 
             }

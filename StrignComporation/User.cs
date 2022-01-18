@@ -14,7 +14,7 @@ namespace StrignComporation
 
         public User(string fio)
         {
-            var names = fio?.Split(' ') ?? new string[3];
+            var names = fio.Split(';') ?? new string[3];
 
             if (names.Length > 0)
                 LastName = names[0];
