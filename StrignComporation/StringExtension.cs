@@ -1,10 +1,28 @@
 ﻿using AdUserLib;
 using F23.StringSimilarity;
 using System;
+using System.Text.RegularExpressions;
 
 namespace StrignComporation
 {
     public static class StringExtension
+    {
+        public static string Eng(this string text)
+        {
+            return EnglishTranslate.TranslateEnglish(text);
+        }
+    
+        public static bool IsEnglish(this string text)
+        {
+            return Regex.IsMatch(text, "^[a-zA-Z ]*$");
+        }
+        public static bool IsRussian(this string text)
+        {
+            return Regex.IsMatch(text, "^[а-яА-Я ]*$");
+        }
+    }
+
+    public static class StringExtensionF23
     {
         public static double Damerau(this string s, string s1)
         {
@@ -54,7 +72,7 @@ namespace StrignComporation
             return TemplateD(ngram.Distance, s, s1);
         }
 
-        private static double TemplateD(Func<string,string,double> func, string s, string s1)
+        private static double TemplateD(Func<string, string, double> func, string s, string s1)
         {
             var sArr = s.Split(" ");
             var sArr1 = s1.Split(" ");
@@ -97,14 +115,6 @@ namespace StrignComporation
 
             return TemplateD(l.Distance, s, s1);
         }
-    
-        public static string Eng(this string text)
-        {
-            return EnglishTranslate.TranslateEnglish(text);
-        }
-    
-
-
 
     }
 }

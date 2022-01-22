@@ -44,9 +44,15 @@ namespace StrignComporation
             foreach (var it in minArr)
             {
                 min = 1;
+
+                if (it.Length < 3)
+                {
+                    continue;
+                }
+
                 for (int i = 0; i < maxArr.Length; i++)
                 {
-                    if (lasted.Contains(i))
+                    if (lasted.Contains(i) || maxArr[i].Length < 3)
                         continue;
 
                     cur = func(new string[2] { it, maxArr[i] });
@@ -62,6 +68,13 @@ namespace StrignComporation
                 d += min;
             }
             return d;
+        }
+
+        public static string Filter(this string s)
+        {
+            return s.Replace(".","")
+                .Replace(",", "")
+                .Replace("-", " ");
         }
 
         public static double Metaphone(this string s, string s1)
@@ -81,6 +94,13 @@ namespace StrignComporation
         public static double MatchRatingApproach(this string s, string s1)
         {
             var _generator = new MatchRatingApproach();
+
+            return TemplateD(_generator.IsSimilar, s, s1);
+        }
+
+        public static double Caverphone(this string s, string s1)
+        {
+            var _generator = new CaverPhone();
 
             return TemplateD(_generator.IsSimilar, s, s1);
         }
