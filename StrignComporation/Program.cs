@@ -42,6 +42,8 @@ namespace StrignComporation
                 , ("Попов Александр Александрович", "Долгов Александр Александрович")
                 , ("Сасов Александр Викторович", "Сасов Александр Виктрович")
                 , ("Сасов Александр Викторович", "Sasov Alex")
+                , ("Иванов Иван Алексеевич", "Иванов Иван Иванович")
+                , ("Иванов Икар Иванович", "Иванов Иван Иванович")
             };
 
             foreach (var test in tests)
@@ -58,7 +60,7 @@ namespace StrignComporation
                     , () => {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("");
-                        Console.WriteLine("\t\tTHE END!");
+                        Console.WriteLine("  THE END!");
                      });
             
 
