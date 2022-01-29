@@ -2,9 +2,11 @@
 using F23.StringSimilarity;
 using NLog;
 using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
+using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,30 +28,42 @@ namespace StrignComporation
             Console.WriteLine("Soundex: {0}", s.Soundex(s1));
             Console.WriteLine("Metaphone: {0}", s.Metaphone(s1));
             Console.WriteLine("DoubleMetaphone: {0}", s.DoubleMetaphone(s1));
+
+            Console.WriteLine("------------------------------------------------------------------------------");
+        }
+
+        static IEnumerable<(string, string)> GetTest()
+        {
+            var tests = new List<(string, string)>()
+            {
+                ("Карасева Екатерина Викторовна", "Лазарева Екатерина Викторовна")
+                , ("Мацуков Александр Сергеевич", "Жуков Александр Сергеевич")
+                , ("Викторов Иван Викторович", "Васильев Иван Викторович")
+                , ("Попов Александр Александрович", "Долгов Александр Александрович")
+                , ("Сасов Александр Викторович", "Сасов Александр Виктрович")
+                , ("Сасов Александр Викторович", "Sasov Alex")
+            };
+
+            foreach (var test in tests)
+                yield return test;
         }
 
         static void Main(string[] args)
         {
-            var l = new QGram();
-
-            int index = 0;
-
-            CompareSimilarity(
-                "Карасева Екатерина Викторовна".Eng()
-                    , "Лазарева Екатерина Викторовна".Eng());
-            CompareSimilarity("Мацуков Александр Сергеевич".Eng()
-                , "Жуков Александр Сергеевич".Eng());
-            CompareSimilarity("Викторов Иван Викторович".Eng()
-                ,"Васильев Иван Викторович".Eng());
-            CompareSimilarity("Попов Александр Александрович".Eng()
-                ,"Долгов Александр Александрович".Eng());
-            CompareSimilarity("Сасов Александр Викторович".Eng()
-                , "Сасов Александр Виктрович".Eng());
-            CompareSimilarity(
-                "Сасов Александр Викторович".Eng()
-                , "Sasov Alex".Eng());
+            GetTest()
+                .ToObservable()
+                .Subscribe(
+                    x => CompareSimilarity(x.Item1.Eng(), x.Item2.Eng())
+                    , ex => Console.WriteLine(ex.Message)
+                    , () => {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("");
+                        Console.WriteLine("\t\tTHE END!");
+                     });
+            
 
             Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.White;
         }
     }
 }
