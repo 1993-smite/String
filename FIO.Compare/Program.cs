@@ -59,12 +59,9 @@ namespace FIO.Compare
             {
                 var toUser = Users[to];
 
-                double d = user.FIO.Eng()
-                    .Caverphone(toUser.FIO.Eng());
-
-                if (d < 1)
+                if (user.FIO.Eng().FuzzyCompare(toUser.FIO.Eng()))
                 {
-                    Logger.Info($"{from};{user.FIO};{to};{toUser.FIO};{d}");
+                    Logger.Info($"{from};{user.FIO};{to};{toUser.FIO}");
                 }
 
             }
