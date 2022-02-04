@@ -84,11 +84,31 @@ namespace StrignComporation
             return TemplateD(_generator.IsSimilar, s, s1);
         }
 
+        public static bool MetaphoneS(this string s, string s1)
+        {
+            var _generator = new Metaphone();
+
+            return _generator.IsSimilar(new[] { s, s1 });
+        }
+
+        public static bool MetaphoneRU(this string s, string s1)
+        {
+            var _generator = new MetaphoneRU();
+
+            return _generator.IsSimilar(new[] { s, s1 });
+        }
+
         public static double DoubleMetaphone(this string s, string s1)
         {
             var _generator = new DoubleMetaphone();
 
             return TemplateD(_generator.IsSimilar, s, s1);
+        }
+        public static bool DoubleMetaphoneS(this string s, string s1)
+        {
+            var _generator = new DoubleMetaphone();
+
+            return _generator.IsSimilar(new[] { s, s1 });
         }
 
         public static double MatchRatingApproach(this string s, string s1)
