@@ -37,14 +37,34 @@ namespace StrignComporation
             return TemplateD(l.Distance, s, s1);
         }
 
+        public static double LevenshteinD(this string s, string s1)
+        {
+            var l = new Levenshtein();
+            return l.Distance(s, s1);
+        }
+
         public static double NormalizedLevenshtein(this string s, string s1)
         {
             var l = new NormalizedLevenshtein();
 
-            return TemplateD(l.Distance, s, s1);
+            return TemplateD(l.Distance,s, s1);
+        }
+
+        public static double NormalizedLevenshteinD(this string s, string s1)
+        {
+            var l = new NormalizedLevenshtein();
+
+            return l.Distance(s, s1);
         }
 
         public static double JaroWinkler(this string s, string s1)
+        {
+            var jw = new JaroWinkler();
+
+            return TemplateD(jw.Distance, s, s1);
+        }
+
+        public static double JaroWinklerD(this string s, string s1)
         {
             var jw = new JaroWinkler();
 
